@@ -33,14 +33,16 @@ with head:
 
 with d:
     gallery = div(id='content').add(div(cls='gallery'))
+    script(src='shuffle.js')
 
 with gallery:
     root = 'https://res.cloudinary.com/itko/image/upload/'
     for i,im in enumerate(images):
         data_src = root + 't_prog2560/' + im['public_id']
         src = root + 't_blur32/' + im['public_id']
-        figure(cls='photo-figure').add(img(cls='lazyload',id=im['public_id'].replace('/','-'),src=src,data_src=data_src))
-        script(src='shuffle.js')
+        fig = figure(cls='photo-figure')
+        with fig:
+            a(href='LINK').add(img(cls='lazyload',id=im['public_id'].replace('/','-'),src=src,data_src=data_src))
 
 
 with open('./index.html', 'w+') as f:
